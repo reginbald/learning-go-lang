@@ -1,0 +1,5 @@
+go run . -> compiles and runs the code
+
+go build -> compiles the code into an executable
+
+go install -> compiles and installs the executable so you can run it without specifying its path.
