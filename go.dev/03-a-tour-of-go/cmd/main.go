@@ -1,7 +1,18 @@
 package main
 
-import "reginbald.com/internal/rot13Reader"
+import (
+	"os"
+
+	"reginbald.com/internal/images"
+	"reginbald.com/internal/rot13Reader"
+)
 
 func main() {
-	rot13Reader.Run()
+
+	switch os.Args[1] {
+	case "0":
+		rot13Reader.Run()
+	case "1":
+		images.Run()
+	}
 }

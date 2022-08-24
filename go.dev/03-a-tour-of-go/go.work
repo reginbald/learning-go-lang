@@ -2,5 +2,6 @@ go 1.19
 
 use (
 	./cmd
+	./internal/images
 	./internal/rot13Reader
 )
