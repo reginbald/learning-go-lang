@@ -6,16 +6,19 @@ import (
 	"reginbald.com/internal/images"
 	"reginbald.com/internal/linkedList"
 	"reginbald.com/internal/rot13Reader"
+	"reginbald.com/internal/tree"
 )
 
 func main() {
 	switch os.Args[1] {
-	case "0":
+	case "rot13Reader":
 		rot13Reader.Run()
-	case "1":
+	case "images":
 		images.Run()
-	case "2":
+	case "linkedList":
 		linkedList.Run()
+	case "tree":
+		tree.Run()
 	}
 
 }
