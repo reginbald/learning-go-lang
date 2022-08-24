@@ -4,4 +4,5 @@ use (
 	./cmd
 	./internal/images
 	./internal/rot13Reader
+	./internal/linkedList
 )
