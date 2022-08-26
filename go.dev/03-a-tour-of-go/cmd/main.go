@@ -6,6 +6,7 @@ import (
 	"reginbald.com/internal/images"
 	"reginbald.com/internal/linkedList"
 	"reginbald.com/internal/loopsAndFunctions"
+	"reginbald.com/internal/maps"
 	"reginbald.com/internal/rot13Reader"
 	"reginbald.com/internal/slices"
 	"reginbald.com/internal/tree"
@@ -18,6 +19,8 @@ func main() {
 		loopsAndFunctions.Run()
 	case "slices":
 		slices.Run()
+	case "maps":
+		maps.Run()
 	case "rot13Reader":
 		rot13Reader.Run()
 	case "images":
