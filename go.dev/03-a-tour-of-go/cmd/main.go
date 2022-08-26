@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 
+	"reginbald.com/internal/fibonacci"
 	"reginbald.com/internal/images"
 	"reginbald.com/internal/linkedList"
 	"reginbald.com/internal/loopsAndFunctions"
@@ -21,6 +22,8 @@ func main() {
 		slices.Run()
 	case "maps":
 		maps.Run()
+	case "fibonacci":
+		fibonacci.Run()
 	case "rot13Reader":
 		rot13Reader.Run()
 	case "images":
