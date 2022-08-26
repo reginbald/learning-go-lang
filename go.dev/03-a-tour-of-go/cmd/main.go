@@ -7,6 +7,7 @@ import (
 	"reginbald.com/internal/linkedList"
 	"reginbald.com/internal/rot13Reader"
 	"reginbald.com/internal/tree"
+	"reginbald.com/internal/webCrawler"
 )
 
 func main() {
@@ -19,6 +20,7 @@ func main() {
 		linkedList.Run()
 	case "tree":
 		tree.Run()
+	case "webCrawler":
+		webCrawler.Run()
 	}
-
 }
