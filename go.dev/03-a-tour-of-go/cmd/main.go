@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 
+	"reginbald.com/internal/errors"
 	"reginbald.com/internal/fibonacci"
 	"reginbald.com/internal/images"
 	"reginbald.com/internal/linkedList"
@@ -27,6 +28,8 @@ func main() {
 		fibonacci.Run()
 	case "stringers":
 		stringers.Run()
+	case "errors":
+		errors.Run()
 	case "rot13Reader":
 		rot13Reader.Run()
 	case "images":
