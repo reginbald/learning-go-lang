@@ -10,6 +10,7 @@ import (
 	"reginbald.com/internal/maps"
 	"reginbald.com/internal/rot13Reader"
 	"reginbald.com/internal/slices"
+	"reginbald.com/internal/stringers"
 	"reginbald.com/internal/tree"
 	"reginbald.com/internal/webCrawler"
 )
@@ -24,6 +25,8 @@ func main() {
 		maps.Run()
 	case "fibonacci":
 		fibonacci.Run()
+	case "stringers":
+		stringers.Run()
 	case "rot13Reader":
 		rot13Reader.Run()
 	case "images":
