@@ -9,6 +9,7 @@ import (
 	"reginbald.com/internal/linkedList"
 	"reginbald.com/internal/loopsAndFunctions"
 	"reginbald.com/internal/maps"
+	"reginbald.com/internal/readers"
 	"reginbald.com/internal/rot13Reader"
 	"reginbald.com/internal/slices"
 	"reginbald.com/internal/stringers"
@@ -30,6 +31,8 @@ func main() {
 		stringers.Run()
 	case "errors":
 		errors.Run()
+	case "readers":
+		readers.Run()
 	case "rot13Reader":
 		rot13Reader.Run()
 	case "images":
