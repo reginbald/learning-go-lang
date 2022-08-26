@@ -5,6 +5,7 @@ import (
 
 	"reginbald.com/internal/images"
 	"reginbald.com/internal/linkedList"
+	"reginbald.com/internal/loopsAndFunctions"
 	"reginbald.com/internal/rot13Reader"
 	"reginbald.com/internal/tree"
 	"reginbald.com/internal/webCrawler"
@@ -12,6 +13,8 @@ import (
 
 func main() {
 	switch os.Args[1] {
+	case "loopsAndFunctions":
+		loopsAndFunctions.Run()
 	case "rot13Reader":
 		rot13Reader.Run()
 	case "images":
