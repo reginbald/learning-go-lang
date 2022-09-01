@@ -1,4 +1,4 @@
-module reginbald.com/cmd/main/v2
+module reginbald.com/cmd/main
 
 go 1.19
 

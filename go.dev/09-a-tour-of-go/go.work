@@ -2,8 +2,16 @@ go 1.19
 
 use (
 	./cmd
+	./internal/errors
+	./internal/fibonacci
 	./internal/images
-	./internal/rot13Reader
 	./internal/linkedList
+	./internal/loopsAndFunctions
+	./internal/maps
+	./internal/readers
+	./internal/rot13Reader
+	./internal/slices
+	./internal/stringers
 	./internal/tree
+	./internal/webCrawler
 )

@@ -1,3 +1,3 @@
-module reginbald.com/internal/loopsAndFunctions/v2
+module reginbald.com/internal/loopsAndFunctions
 
 go 1.19
