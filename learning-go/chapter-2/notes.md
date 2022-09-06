@@ -1,4 +1,4 @@
-# Chapter 2
+# Chapter 2 - Primitive Types an Declarations
 
 ## The Zero Value
 * Go assigns a default zero value to any declares variable that is not assigned a value

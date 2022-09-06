@@ -1,4 +1,4 @@
-# Chapter 1 Notes
+# Chapter 1 - Go Environment
 
 ## Installing the Go Tools
 * Go programs compile to a single binary and do not require any additional software to be installed in order to run them.
