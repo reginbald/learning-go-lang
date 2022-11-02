@@ -1,4 +1,4 @@
-module reginbald.com/m/v2
+module reginbald.com/hello
 
 go 1.19
 
