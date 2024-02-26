@@ -1,0 +1,47 @@
+package views
+
+templ Index(content templ.Component) {
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="color-scheme" content="light dark" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"
+    />
+		<title>HTMX</title>
+    <style>
+      html,body {
+        height: 100vh;
+      }
+
+      body>footer {
+        position: sticky;
+        top: 100vh;
+      }
+    </style>
+	</head>
+
+	<body>
+    <header>
+    <nav>
+      <ul>
+        <li><p class="pico-color-purple-600"><strong>HTMX</strong></p></li>
+      </ul>
+      <ul>
+        <li><a href="/contacts">Contacts</a></li>
+      </ul>
+    </nav>
+    </header>
+    <main>  
+		  @content
+    </main>
+    <footer><section>
+      <hr />
+      <p align="center">© 2024 Reginbald</p>
+    </section></footer>
+  </body>
+</html>
+}
