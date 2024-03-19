@@ -21,6 +21,8 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) { http.Redirect(w, r, "/contacts", http.StatusSeeOther) })
 
 	r.Get("/contacts", contacts.Contacts)
+	r.Get("/contacts/new", contacts.GetContactForm)
+	r.Post("/contacts/new", contacts.PostContact)
 
 	http.ListenAndServe(":3000", r)
 }
