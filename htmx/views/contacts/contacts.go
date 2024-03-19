@@ -48,10 +48,10 @@ func PostContact(w http.ResponseWriter, r *http.Request) {
 	}
 	if len(errors) > 0 {
 		templ.Handler(views.Index(newContact(contact, errors))).ServeHTTP(w, r)
+		return
 	}
 
 	// Store
 	repository.AddContact(contact)
 	http.Redirect(w, r, "/contacts", http.StatusSeeOther)
-
 }
