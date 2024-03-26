@@ -2,17 +2,19 @@ package contacts
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/a-h/templ"
+	"github.com/go-chi/chi/v5"
 	"github.com/reginbald/learning-go-lang/htmx/repository"
 	"github.com/reginbald/learning-go-lang/htmx/views"
 )
 
-func Contacts(w http.ResponseWriter, r *http.Request) {
+func GetContacts(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("q")
 
 	if query != "" {
-		templ.Handler(views.Index(index(query, repository.GetContact(query)))).ServeHTTP(w, r)
+		templ.Handler(views.Index(index(query, repository.SearchContacts(query)))).ServeHTTP(w, r)
 		return
 	}
 
@@ -54,4 +56,18 @@ func PostContact(w http.ResponseWriter, r *http.Request) {
 	// Store
 	repository.AddContact(contact)
 	http.Redirect(w, r, "/contacts", http.StatusSeeOther)
+}
+
+func GetContact(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(chi.URLParam(r, "contactID"))
+	if err != nil {
+		http.Redirect(w, r, "/contacts", http.StatusSeeOther)
+		return
+	}
+	c, err := repository.GetContact(id)
+	if err != nil {
+		http.Redirect(w, r, "/contacts", http.StatusSeeOther)
+		return
+	}
+	templ.Handler(views.Index(show(*c))).ServeHTTP(w, r)
 }
