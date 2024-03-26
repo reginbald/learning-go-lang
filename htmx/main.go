@@ -25,6 +25,7 @@ func main() {
 		r.Get("/new", contacts.GetContactForm)
 		r.Post("/new", contacts.PostContact)
 		r.Get("/{contactID}", contacts.GetContact)
+		r.Get("/{contactID}/edit", contacts.GetContactEditForm)
 	})
 
 	http.ListenAndServe(":3000", r)

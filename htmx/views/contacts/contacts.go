@@ -1,6 +1,7 @@
 package contacts
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -70,4 +71,19 @@ func GetContact(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	templ.Handler(views.Index(show(*c))).ServeHTTP(w, r)
+}
+
+func GetContactEditForm(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(chi.URLParam(r, "contactID"))
+	if err != nil {
+		http.Redirect(w, r, "/contacts", http.StatusSeeOther)
+		return
+	}
+	c, err := repository.GetContact(id)
+	if err != nil {
+		http.Redirect(w, r, fmt.Sprintf("/contacts/%d", id), http.StatusSeeOther)
+		return
+	}
+	errors := map[string]string{}
+	templ.Handler(views.Index(edit(*c, errors))).ServeHTTP(w, r)
 }

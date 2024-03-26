@@ -1,0 +1,55 @@
+package contacts
+
+import "fmt"
+import "github.com/reginbald/learning-go-lang/htmx/repository"
+
+
+templ edit(contact repository.Contact, errors map[string]string) {
+<form action={templ.URL(fmt.Sprintf("/contacts/%d/edit", contact.ID))} method="post">
+  <fieldset>
+      <legend>Contact Values</legend>
+      <p>
+        <label for="email">Email</label> 
+        <input name="email" id="email" type="email" placeholder="Email" 
+          value={ fmt.Sprintf("%s", contact.Email) }
+          aria-invalid={hasValue(errors["email"]) }/>
+          <small id="invalid-helper">{ errors["email"] }</small>
+      </p>
+       <p>
+        <label for="first_name">First Name</label>
+        <input name="first_name" id="first_name" type="text" placeholder="First Name" 
+          value={ fmt.Sprintf("%s", contact.FirstName) }
+          aria-invalid={hasValue(errors["first_name"]) }/>
+          <small id="invalid-helper">{ errors["first_name"] }</small>
+      </p>
+      <p>
+        <label for="last_name">Last Name</label>
+        <input name="last_name" id="last_name" type="text" placeholder="Last Name" 
+          value={ fmt.Sprintf("%s", contact.LastName) }
+          aria-invalid={hasValue(errors["last_name"]) }/>
+          <small id="invalid-helper">{ errors["last_name"] }</small>
+      </p>
+      <p>
+        <label for="phone">Phone</label>
+        <input name="phone" id="phone" type="text" placeholder="Phone" 
+          value={ fmt.Sprintf("%s", contact.Phone) } 
+          aria-invalid={hasValue(errors["phone"]) }/>
+          <small id="invalid-helper">{ errors["phone"] }</small>
+      </p>
+      <button>Save</button>
+  </fieldset>
+</form>
+<nav>
+  <ul>
+    <li></li>
+  </ul>
+  <ul>
+    <li>
+      <form action={templ.URL(fmt.Sprintf("/contacts/%d/delete", contact.ID))} method="post">
+        <button>Delete Contact</button>
+      </form>
+    </li>
+    <li><a href="/contacts/">Back</a></li>
+  </ul>
+</nav>
+}
