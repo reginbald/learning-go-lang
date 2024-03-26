@@ -40,9 +40,14 @@ templ newContact(contact repository.Contact, errors map[string]string) {
       <button>Save</button>
     </fieldset>
   </form>
-  <p>
-    <a href="/contacts">Back</a>
-  </p>
+<nav>
+  <ul>
+    <li></li>
+  </ul>
+  <ul>
+    <li><a href="/contacts/">Back</a></li>
+  </ul>
+</nav>
 }
 
 func hasValue(value string) string {
