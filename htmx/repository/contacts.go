@@ -38,6 +38,18 @@ func GetContact(id int) (*Contact, error) {
 	return &contacts[i], nil
 }
 
+func UpdateContact(id int, update Contact) (*Contact, error) {
+	i := slices.IndexFunc(contacts, func(c Contact) bool {
+		return c.ID == id
+	})
+	if i == -1 {
+		return nil, fmt.Errorf("error contact with id: %d was not found", id)
+	}
+	update.ID = contacts[i].ID
+	contacts[i] = update
+	return &contacts[i], nil
+}
+
 func SearchContacts(query string) []Contact {
 	out := make([]Contact, 0)
 	for _, c := range contacts {

@@ -20,13 +20,7 @@ func main() {
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) { http.Redirect(w, r, "/contacts", http.StatusSeeOther) })
 
-	r.Route("/contacts", func(r chi.Router) {
-		r.Get("/", contacts.GetContacts)
-		r.Get("/new", contacts.GetContactForm)
-		r.Post("/new", contacts.PostContact)
-		r.Get("/{contactID}", contacts.GetContact)
-		r.Get("/{contactID}/edit", contacts.GetContactEditForm)
-	})
+	r.Route("/contacts", contacts.ContactsRouter)
 
 	http.ListenAndServe(":3000", r)
 }
