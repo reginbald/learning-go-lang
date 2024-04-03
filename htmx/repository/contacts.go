@@ -28,6 +28,21 @@ func AddContact(c Contact) {
 	contacts = append(contacts, c)
 }
 
+func DeleteContact(id int) (*Contact, error) {
+	i := slices.IndexFunc(contacts, func(c Contact) bool {
+		return c.ID == id
+	})
+	if i == -1 {
+		return nil, fmt.Errorf("error contact with id: %d was not found", id)
+	}
+
+	out := contacts[i]
+
+	contacts = append(contacts[:i], contacts[i+1:]...)
+
+	return &out, nil
+}
+
 func GetContact(id int) (*Contact, error) {
 	i := slices.IndexFunc(contacts, func(c Contact) bool {
 		return c.ID == id

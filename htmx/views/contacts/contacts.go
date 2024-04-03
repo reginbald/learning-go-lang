@@ -18,6 +18,7 @@ func ContactsRouter(r chi.Router) {
 	r.Get("/{contactID}", GetContact)
 	r.Get("/{contactID}/edit", GetContactEditForm)
 	r.Post("/{contactID}/edit", UpdateContact)
+	r.Post("/{contactID}/delete", DeleteContact)
 }
 
 func GetContacts(w http.ResponseWriter, r *http.Request) {
@@ -135,4 +136,19 @@ func UpdateContact(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, fmt.Sprintf("/contacts/%d", id), http.StatusSeeOther)
+}
+
+func DeleteContact(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(chi.URLParam(r, "contactID"))
+	if err != nil {
+		http.Redirect(w, r, fmt.Sprintf("/contacts/%d", id), http.StatusSeeOther)
+		return
+	}
+	_, err = repository.DeleteContact(id)
+	if err != nil {
+		http.Redirect(w, r, fmt.Sprintf("/contacts/%d", id), http.StatusSeeOther)
+		return
+	}
+
+	http.Redirect(w, r, "/contacts", http.StatusSeeOther)
 }
