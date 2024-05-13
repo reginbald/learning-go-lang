@@ -73,3 +73,8 @@ tmp_dir = "tmp"
 [screen]
   clear_on_rebuild = true
   keep_scroll = true
+
+[proxy]
+  enabled = true
+  proxy_port = 3001
+  app_port = 3000
