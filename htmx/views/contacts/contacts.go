@@ -18,7 +18,7 @@ func ContactsRouter(r chi.Router) {
 	r.Get("/{contactID}", GetContact)
 	r.Get("/{contactID}/edit", GetContactEditForm)
 	r.Post("/{contactID}/edit", UpdateContact)
-	r.Post("/{contactID}/delete", DeleteContact)
+	r.Delete("/{contactID}", DeleteContact)
 }
 
 func GetContacts(w http.ResponseWriter, r *http.Request) {
