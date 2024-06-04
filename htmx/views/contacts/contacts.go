@@ -67,6 +67,7 @@ func GetContacts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Println("PAGE", page)
 	templ.Handler(views.Index(index(query, page, repository.GetContacts(page)))).ServeHTTP(w, r)
 }
 

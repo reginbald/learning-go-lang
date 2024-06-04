@@ -39,21 +39,43 @@ templ index(query string, page int, contacts []repository.Contact) {
 				</td>
 			</tr>
 			}
+			// if len(contacts) > 0 {
+			// 	<tr><td colspan="100%">
+			// 		<button 
+			// 		style="width: 100%;"
+			// 		hx-target="closest tr"
+			// 		hx-swap="outerHTML"
+			// 		hx-select="tbody > tr"
+			// 		hx-get={fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query)}>
+			// 			Load More
+			// 		</button>
+			// 	</td></tr>
+			// }
+			if len(contacts) > 0 {
+				<tr><td colspan="100%" style="text-align:center;">
+						<span hx-target="closest tr"
+						hx-trigger="revealed"
+						hx-swap="outerHTML"
+						hx-select="tbody > tr"
+						hx-get={fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query)}>
+						Loading More...</span>
+				</td></tr>
+			}
 		</tbody>
   </table>
-	<nav>
-  <ul>
-		if page > 1 {
-			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page - 1, query))}>Previous</a></li>
-		}
-  </ul>
-	<ul>
-		<li>{fmt.Sprintf("Page: %d", page)}</li>
-	</ul>
-	<ul>
-		if len(contacts) == 10 {
-			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query))}>Next</a></li>
-		}
-	</ul>
-</nav>
+// 	<nav>
+//   <ul>
+// 		if page > 1 {
+// 			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page - 1, query))}>Previous</a></li>
+// 		}
+//   </ul>
+// 	<ul>
+// 		<li>{fmt.Sprintf("Page: %d", page)}</li>
+// 	</ul>
+// 	<ul>
+// 		if len(contacts) == 10 {
+// 			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query))}>Next</a></li>
+// 		}
+// 	</ul>
+// </nav>
 }
