@@ -3,8 +3,16 @@ package contacts
 import "fmt"
 import "github.com/reginbald/learning-go-lang/htmx/repository"
 
-templ index(query string, contacts []repository.Contact) {
+templ index(query string, page int, contacts []repository.Contact) {
 	<h1>Contacts</h1>	
+	<nav>
+		<ul>
+			<li></li>
+		</ul>
+		<ul>
+			<li><a href="/contacts/new">Add Contact</a> </li>
+		</ul>
+	</nav>
 	<form action="/contacts" method="get">
   <fieldset role="group">
 		<label for="search">Search Term</label>
@@ -33,13 +41,19 @@ templ index(query string, contacts []repository.Contact) {
 			}
 		</tbody>
   </table>
-
-<nav>
+	<nav>
   <ul>
-    <li></li>
+		if page > 1 {
+			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page - 1, query))}>Previous</a></li>
+		}
   </ul>
-  <ul>
-    <li><a href="/contacts/new">Add Contact</a> </li>
-  </ul>
+	<ul>
+		<li>{fmt.Sprintf("Page: %d", page)}</li>
+	</ul>
+	<ul>
+		if len(contacts) == 10 {
+			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query))}>Next</a></li>
+		}
+	</ul>
 </nav>
 }

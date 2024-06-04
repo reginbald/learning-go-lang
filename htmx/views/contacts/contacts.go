@@ -52,13 +52,22 @@ func ValidateEmail(w http.ResponseWriter, r *http.Request) {
 
 func GetContacts(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("q")
+	page := 1
+	if qPage := r.URL.Query().Get("page"); qPage != "" {
+		iPage, err := strconv.Atoi(qPage)
+		if err != nil {
+			http.Redirect(w, r, "/contacts", http.StatusSeeOther)
+			return
+		}
+		page = iPage
+	}
 
 	if query != "" {
-		templ.Handler(views.Index(index(query, repository.SearchContacts(query)))).ServeHTTP(w, r)
+		templ.Handler(views.Index(index(query, page, repository.SearchContacts(query, page)))).ServeHTTP(w, r)
 		return
 	}
 
-	templ.Handler(views.Index(index(query, repository.GetContacts()))).ServeHTTP(w, r)
+	templ.Handler(views.Index(index(query, page, repository.GetContacts(page)))).ServeHTTP(w, r)
 }
 
 func GetContactForm(w http.ResponseWriter, r *http.Request) {

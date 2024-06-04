@@ -9,6 +9,15 @@ import (
 var contacts = []Contact{
 	{ID: 1, FirstName: "Joe", LastName: "Smith", Phone: "911", Email: "joe@smith.com"},
 	{ID: 2, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 3, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 4, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 5, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 6, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 7, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 8, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 9, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 10, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
+	{ID: 11, FirstName: "Sara", LastName: "Black", Phone: "112", Email: "sara@black.com"},
 }
 
 type Contact struct {
@@ -28,8 +37,8 @@ func Validate(x Contact) error {
 	return nil
 }
 
-func GetContacts() []Contact {
-	return contacts
+func GetContacts(page int) []Contact {
+	return paginate(page, contacts)
 }
 
 func AddContact(c Contact) {
@@ -74,7 +83,7 @@ func UpdateContact(id int, update Contact) (*Contact, error) {
 	return &contacts[i], nil
 }
 
-func SearchContacts(query string) []Contact {
+func SearchContacts(query string, page int) []Contact {
 	out := make([]Contact, 0)
 	for _, c := range contacts {
 		if strings.EqualFold(c.FirstName, query) {
@@ -82,5 +91,17 @@ func SearchContacts(query string) []Contact {
 		}
 	}
 
-	return out
+	return paginate(page, out)
+}
+
+func paginate(page int, list []Contact) []Contact {
+	start := (page - 1) * 10
+	if start > len(list) {
+		start = len(list)
+	}
+	end := start + 10
+	if end > len(list) {
+		end = len(list)
+	}
+	return list[start:end]
 }
