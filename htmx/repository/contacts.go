@@ -19,6 +19,15 @@ type Contact struct {
 	Email     string
 }
 
+func Validate(x Contact) error {
+	for _, c := range contacts {
+		if c.ID != x.ID && c.Email == x.Email {
+			return fmt.Errorf("%s is not unique", x.Email)
+		}
+	}
+	return nil
+}
+
 func GetContacts() []Contact {
 	return contacts
 }

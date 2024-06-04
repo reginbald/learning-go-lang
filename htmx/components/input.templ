@@ -1,0 +1,36 @@
+package components
+
+type HTMX struct {
+  Get string
+}
+
+type InputArguments struct {
+  Id string
+  Name string
+  IType string
+
+  Label string
+  Placeholder string
+  Value string
+
+  AriaInvalid string
+  Err string
+
+  Htmx *HTMX
+}
+
+templ Input(args InputArguments) {
+  <div>
+      <label for={args.Id}>{args.Label}</label> 
+  		<input name={ args.Name } id={ args.Id } type={ args.IType } placeholder={args.Placeholder}
+      if args.Htmx != nil {
+        hx-get={args.Htmx.Get}
+        hx-target="closest div"
+        hx-swap="outerHTML"
+        hx-trigger="change, keyup delay:200ms changed"
+      }
+			value={args.Value}
+			aria-invalid={args.AriaInvalid}/>
+			<small class="error">{args.Err}</small>
+  </div>
+}

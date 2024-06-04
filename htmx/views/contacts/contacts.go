@@ -7,6 +7,7 @@ import (
 
 	"github.com/a-h/templ"
 	"github.com/go-chi/chi/v5"
+	"github.com/reginbald/learning-go-lang/htmx/components"
 	"github.com/reginbald/learning-go-lang/htmx/repository"
 	"github.com/reginbald/learning-go-lang/htmx/views"
 )
@@ -17,8 +18,36 @@ func ContactsRouter(r chi.Router) {
 	r.Post("/new", CreateContact)
 	r.Get("/{contactID}", GetContact)
 	r.Get("/{contactID}/edit", GetContactEditForm)
+	r.Get("/{contactID}/email", ValidateEmail)
 	r.Post("/{contactID}/edit", UpdateContact)
 	r.Delete("/{contactID}", DeleteContact)
+}
+
+func ValidateEmail(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(chi.URLParam(r, "contactID"))
+	if err != nil {
+		http.Redirect(w, r, "/contacts", http.StatusSeeOther)
+		return
+	}
+	email := r.URL.Query().Get("email")
+	err = repository.Validate(repository.Contact{ID: id, Email: email})
+	invalid, errMessage := "false", ""
+	if err != nil {
+		invalid, errMessage = "true", err.Error()
+	}
+
+	templ.Handler(components.Input(components.InputArguments{
+		Id:          "email",
+		Name:        "email",
+		IType:       "email",
+		Placeholder: "Email",
+		Value:       email,
+		AriaInvalid: invalid,
+		Err:         errMessage,
+		Htmx: &components.HTMX{
+			Get: fmt.Sprintf("/contacts/%d/email", id),
+		},
+	})).ServeHTTP(w, r)
 }
 
 func GetContacts(w http.ResponseWriter, r *http.Request) {
