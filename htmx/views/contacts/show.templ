@@ -3,17 +3,16 @@ package contacts
 import "fmt"
 import "github.com/reginbald/learning-go-lang/htmx/repository"
 
-
 templ show(contact repository.Contact) {
-  <article>
-  <header>
-  <h1>{contact.FirstName} {contact.LastName}</h1>
-  </header>
-    <div>Phone: {contact.Phone}</div>
-    <div>Email: {contact.Email}</div>
-  <footer>
-    <a href={templ.URL(fmt.Sprintf("/contacts/%d/edit", contact.ID))}>Edit</a>
-    <a href="/contacts">Back</a>
-  </footer>
-</article>
+	<article>
+		<header>
+			<h1>{ contact.FirstName } { contact.LastName }</h1>
+		</header>
+		<div>Phone: { contact.Phone }</div>
+		<div>Email: { contact.Email }</div>
+		<footer>
+			<a href={ templ.URL(fmt.Sprintf("/contacts/%d/edit", contact.ID)) }>Edit</a>
+			<a href="/contacts">Back</a>
+		</footer>
+	</article>
 }

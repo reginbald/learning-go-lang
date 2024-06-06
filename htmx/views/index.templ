@@ -1,16 +1,16 @@
 package views
 
 templ Index(content templ.Component) {
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="color-scheme" content="light dark" />
-    <link rel="stylesheet" href="/assets/css/pico.classless.min.css"/>
-    <script src="/assets/js/htmx.min.js"></script>
-		<title>HTMX</title>
-    <style>
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<meta name="color-scheme" content="light dark"/>
+			<link rel="stylesheet" href="/assets/css/pico.classless.min.css"/>
+			<script src="/assets/js/htmx.min.js"></script>
+			<title>HTMX</title>
+			<style>
       html,body {
         height: 100vh;
       }
@@ -20,26 +20,27 @@ templ Index(content templ.Component) {
         top: 100vh;
       }
     </style>
-	</head>
-
-	<body hx-boost="true">
-    <header>
-    <nav>
-      <ul>
-        <li><p class="pico-color-purple-600"><strong>HTMX</strong></p></li>
-      </ul>
-      <ul>
-        <li><a href="/contacts">Contacts</a></li>
-      </ul>
-    </nav>
-    </header>
-    <main>  
-		  @content
-    </main>
-    <footer><section>
-      <hr />
-      <p align="center">© 2024 Reginbald</p>
-    </section></footer>
-  </body>
-</html>
+		</head>
+		<body hx-boost="true">
+			<header>
+				<nav>
+					<ul>
+						<li><p class="pico-color-purple-600"><strong>HTMX</strong></p></li>
+					</ul>
+					<ul>
+						<li><a href="/contacts">Contacts</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				@content
+			</main>
+			<footer>
+				<section>
+					<hr/>
+					<p align="center">© 2024 Reginbald</p>
+				</section>
+			</footer>
+		</body>
+	</html>
 }

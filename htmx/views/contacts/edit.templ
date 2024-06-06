@@ -4,71 +4,70 @@ import "fmt"
 import "github.com/reginbald/learning-go-lang/htmx/repository"
 import "github.com/reginbald/learning-go-lang/htmx/components"
 
-
 templ edit(contact repository.Contact, errors map[string]string) {
-<form action={templ.URL(fmt.Sprintf("/contacts/%d/edit", contact.ID))} method="post">
-  <fieldset>
-      <legend>Contact Values</legend>
-      @components.Input(components.InputArguments{
-        Id:          "email",
-        Name:        "email",
-        IType:       "email",
-        Label:       "Email",
-        Placeholder: "Email",
-        Value:       contact.Email,
-        AriaInvalid: hasValue(errors["email"]),
-        Err:         errors["email"],
-        Htmx: &components.HTMX{
-          Get:  fmt.Sprintf("/contacts/%d/email", contact.ID),
-        },
-      })
-      @components.Input(components.InputArguments{
-        Id:          "first_name",
-        Name:        "first_name",
-        IType:       "text",
-        Label:       "First Name",
-        Placeholder: "First Name",
-        Value:       contact.FirstName,
-        AriaInvalid: hasValue(errors["first_name"]),
-        Err:         errors["first_name"],
-      })
-      @components.Input(components.InputArguments{
-        Id:          "last_name",
-        Name:        "last_name",
-        IType:       "text",
-        Label:       "Last Name",
-        Placeholder: "Last Name",
-        Value:       contact.LastName,
-        AriaInvalid: hasValue(errors["last_name"]),
-        Err:         errors["last_name"],
-      })
-      @components.Input(components.InputArguments{
-        Id:          "phone",
-        Name:        "phone",
-        IType:       "text",
-        Label:       "Phone",
-        Placeholder: "Phone",
-        Value:       contact.Phone,
-        AriaInvalid: hasValue(errors["phone"]),
-        Err:         errors["phone"],
-      })
-      <button>Save</button>
-  </fieldset>
-</form>
-<nav>
-  <ul>
-    <li></li>
-  </ul>
-  <ul>
-    <li>
-      <button 
-      hx-delete={fmt.Sprintf("/contacts/%d", contact.ID)} 
-      hx-target="body" 
-      hx-push-url="true"
-      hx-confirm="Are you sure you want to delete this contact?"
-      >Delete Contact</button>
-    </li>
-    <li><a href="/contacts/">Back</a></li>
-  </ul>
-</nav>
+	<form action={ templ.URL(fmt.Sprintf("/contacts/%d/edit", contact.ID)) } method="post">
+		<fieldset>
+			<legend>Contact Values</legend>
+			@components.Input(components.InputArguments{
+				Id:          "email",
+				Name:        "email",
+				IType:       "email",
+				Label:       "Email",
+				Placeholder: "Email",
+				Value:       contact.Email,
+				AriaInvalid: hasValue(errors["email"]),
+				Err:         errors["email"],
+				Htmx: &components.HTMX{
+					Get: fmt.Sprintf("/contacts/%d/email", contact.ID),
+				},
+			})
+			@components.Input(components.InputArguments{
+				Id:          "first_name",
+				Name:        "first_name",
+				IType:       "text",
+				Label:       "First Name",
+				Placeholder: "First Name",
+				Value:       contact.FirstName,
+				AriaInvalid: hasValue(errors["first_name"]),
+				Err:         errors["first_name"],
+			})
+			@components.Input(components.InputArguments{
+				Id:          "last_name",
+				Name:        "last_name",
+				IType:       "text",
+				Label:       "Last Name",
+				Placeholder: "Last Name",
+				Value:       contact.LastName,
+				AriaInvalid: hasValue(errors["last_name"]),
+				Err:         errors["last_name"],
+			})
+			@components.Input(components.InputArguments{
+				Id:          "phone",
+				Name:        "phone",
+				IType:       "text",
+				Label:       "Phone",
+				Placeholder: "Phone",
+				Value:       contact.Phone,
+				AriaInvalid: hasValue(errors["phone"]),
+				Err:         errors["phone"],
+			})
+			<button>Save</button>
+		</fieldset>
+	</form>
+	<nav>
+		<ul>
+			<li></li>
+		</ul>
+		<ul>
+			<li>
+				<button
+					hx-delete={ fmt.Sprintf("/contacts/%d", contact.ID) }
+					hx-target="body"
+					hx-push-url="true"
+					hx-confirm="Are you sure you want to delete this contact?"
+				>Delete Contact</button>
+			</li>
+			<li><a href="/contacts/">Back</a></li>
+		</ul>
+	</nav>
 }

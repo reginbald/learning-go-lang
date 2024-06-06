@@ -4,7 +4,7 @@ import "fmt"
 import "github.com/reginbald/learning-go-lang/htmx/repository"
 
 templ index(query string, page int, contacts []repository.Contact) {
-	<h1>Contacts</h1>	
+	<h1>Contacts</h1>
 	<nav>
 		<ul>
 			<li></li>
@@ -14,30 +14,34 @@ templ index(query string, page int, contacts []repository.Contact) {
 		</ul>
 	</nav>
 	<form action="/contacts" method="get">
-  <fieldset role="group">
-		<label for="search">Search Term</label>
-		<input id="search" type="search" name="q" value={query}/>
-		<input type="submit" value="Search"/>
-  </fieldset>
+		<fieldset role="group">
+			<label for="search">Search Term</label>
+			<input id="search" type="search" name="q" value={ query }/>
+			<input type="submit" value="Search"/>
+		</fieldset>
 	</form>
 	<table>
 		<thead>
 			<tr>
-				<th>First</th> <th>Last</th> <th>Phone</th> <th>Email</th> <th></th>
+				<th>First</th>
+				<th>Last</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-		for _, contact := range contacts {
-			<tr>
-				<td>{ contact.FirstName }</td>
-				<td>{ contact.LastName }</td>
-				<td>{ contact.Phone }</td>
-				<td>{ contact.Email }</td> 
-				<td>
-					<a href={templ.URL(fmt.Sprintf("/contacts/%d/edit", contact.ID))}>Edit</a>
-					<a href={templ.URL(fmt.Sprintf("/contacts/%d", contact.ID))}>View</a>
-				</td>
-			</tr>
+			for _, contact := range contacts {
+				<tr>
+					<td>{ contact.FirstName }</td>
+					<td>{ contact.LastName }</td>
+					<td>{ contact.Phone }</td>
+					<td>{ contact.Email }</td>
+					<td>
+						<a href={ templ.URL(fmt.Sprintf("/contacts/%d/edit", contact.ID)) }>Edit</a>
+						<a href={ templ.URL(fmt.Sprintf("/contacts/%d", contact.ID)) }>View</a>
+					</td>
+				</tr>
 			}
 			// if len(contacts) > 0 {
 			// 	<tr><td colspan="100%">
@@ -52,30 +56,35 @@ templ index(query string, page int, contacts []repository.Contact) {
 			// 	</td></tr>
 			// }
 			if len(contacts) > 0 {
-				<tr><td colspan="100%" style="text-align:center;">
-						<span hx-target="closest tr"
-						hx-trigger="revealed"
-						hx-swap="outerHTML"
-						hx-select="tbody > tr"
-						hx-get={fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query)}>
-						Loading More...</span>
-				</td></tr>
+				<tr>
+					<td colspan="100%" style="text-align:center;">
+						<span
+							hx-target="closest tr"
+							hx-trigger="revealed"
+							hx-swap="outerHTML"
+							hx-select="tbody > tr"
+							hx-get={ fmt.Sprintf("/contacts?page=%d&q=%s", page+1, query) }
+						>
+							Loading More...
+						</span>
+					</td>
+				</tr>
 			}
 		</tbody>
-  </table>
-// 	<nav>
-//   <ul>
-// 		if page > 1 {
-// 			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page - 1, query))}>Previous</a></li>
-// 		}
-//   </ul>
-// 	<ul>
-// 		<li>{fmt.Sprintf("Page: %d", page)}</li>
-// 	</ul>
-// 	<ul>
-// 		if len(contacts) == 10 {
-// 			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query))}>Next</a></li>
-// 		}
-// 	</ul>
-// </nav>
+	</table>
+	// 	<nav>
+	//   <ul>
+	// 		if page > 1 {
+	// 			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page - 1, query))}>Previous</a></li>
+	// 		}
+	//   </ul>
+	// 	<ul>
+	// 		<li>{fmt.Sprintf("Page: %d", page)}</li>
+	// 	</ul>
+	// 	<ul>
+	// 		if len(contacts) == 10 {
+	// 			<li><a href={templ.URL(fmt.Sprintf("/contacts?page=%d&q=%s", page + 1, query))}>Next</a></li>
+	// 		}
+	// 	</ul>
+	// </nav>
 }
